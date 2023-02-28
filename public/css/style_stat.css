@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gilroy', sans-serif;
+    object-fit: cover;
+    --purple: #5D30C3;
+}
+
+html, body{
+    color: #1F1E21;
+}
+
+header{
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12);
+}
+
+.header-title-wrapper{
+    height: 56px;
+    border-bottom: 1px solid #EBE9EE;
+}
+
+.header-title-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1471px;
+    height: inherit;
+    margin: auto;
+}
+
+.profile{
+    display: flex;
+}
+
+.profile-pic{
+    margin-right: 8px;
+}
+
+.profile-pic img{
+    width: 36px;
+    height: 36px;
+    border-radius: 38px;
+    border: 1px solid #F3F3F5;
+}
+
+.profile-data{
+    margin-right: 24px;
+}
+
+.profile-fullname{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.profile-jobtitle{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.header-nav{
+    width: 1471px;
+    margin: auto;
+    height: 52px;
+    display: flex;
+    align-items: center;
+}
+
+.header-nav ul{
+    display: flex;
+    list-style: none;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    gap: 24px;
+}
+
+.nav-element a{
+    text-decoration: none;
+    color: #1F1E21;
+}
+
+.nav-element.active{
+    border-bottom: 2px var(--purple) solid;
+    color: var(--purple);
+}
+
+.nav-element.active a{
+    color: var(--purple);
+}
+
+.nav-element{
+    height: 52px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+main{
+    background-color: #F8F8FA;
+    color: black;
+    height: 100vh;
+}
+
+.main-wrapper{
+    width: 1471px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 24px;
+}
+
+.main-title{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.main-filters{
+    width: 1471px;
+    height: 48px;
+    border: 1px solid #EBE9EE;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.main-filters ul{
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 16px;
+}
+
+.main-filters ul li{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.main-filters ul li.active{
+    color: var(--purple) !important;
+}
+
+.main-filters ul li.active svg{
+    transform: scale(1, -1);
+}
+
+.cards-row{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 24px;
+}
+
+.cards-container{
+    gap: 24px;
+}
+
+
+.card-element{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 349px;
+    height: 195px;
+    padding: 16px;
+    border: 1px solid #EBE9EE;
+    border-radius: 24px;
+    background-color: #FFFFFF;
+}
+
+.card-header{
+    display: flex;
+    gap: 16px;
+}
+
+.card-pic{
+    width: 72px;
+    height: 72px;
+    border: 1px solid #EBE9EE;
+    border-radius: 36px;
+}
+
+.card-fullname{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    width: 138px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+.card-fullname:hover{
+    color: var(--purple);
+}
+
+.card-rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px 4px 4px;
+    gap: 4px;
+    width: 53px;
+    height: 28px;
+    background: #FFFFFF;
+    border: 1px solid #EBE9EE;
+    border-radius: 10px;
+}
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-content-line{
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    width: 298px
+}
+
+.card-content-line-title{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #98969E;
+}
+
+.card-content-line-data{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: right;
+}
+
+.exit-btn{
+    margin-top: 6px;
+    cursor: pointer;
+}
