@@ -15,10 +15,7 @@ class ProfileUserController extends Controller
     public function set(Request $request){
         $db = DB::table('user')
             ->where('id','=',Auth::id());
-            if (is_null($request['third_name']) | is_null($request['third_name'])){
-                return redirect()->back(); //ошибку написать
-            }
-            $db->update(['name' => $request['first_name']]);
+            $db->update(['name' => $request['name']]);
             $db->update(['surname' => $request['last_name']]);
         if(!is_null($request['third_name'])){
             $db->update(['third_name' => $request['third_name']]);
@@ -28,9 +25,13 @@ class ProfileUserController extends Controller
             DB::table('user')
                 ->where('id','=',Auth::id())
                 ->update(['avatar' => $path]);
-            return redirect('/profile-data');
+            return response()->json([
+                'success' => true,
+            ]);
         }
-        return redirect('/profile-data');
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     public function passwordChange(Request $request){
@@ -42,12 +43,20 @@ class ProfileUserController extends Controller
                     ->update([
                         'password' => Hash::make($request['new_password'])
                     ]);
-                return redirect('/profile-data');
+                return response()->json([
+                    'success' => true,
+                ]);
             }else{
-                return redirect('/profile-data');
+                return response()->json([
+                    'success' => false,
+                    'error' => 'new_different'
+                ]);
             }
         }else{
-            return redirect('/profile-data');
+            return response()->json([
+                'success' => false,
+                'error' => 'password_wrong'
+            ]);
         }
     }
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="{{ asset('/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery.toast.css')}}">
 </head>
 </html>
 <body>

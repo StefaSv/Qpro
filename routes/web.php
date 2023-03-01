@@ -65,9 +65,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/user/confirm/{id}', [\App\Http\Controllers\SalesController::class, 'userConfirm']);
 
     Route::get('/advertisement', function (){return view('advertisement.advertisement');});
-    Route::post('/advertisement/send_change/{id}',[\App\Http\Controllers\AdvertisementController::class, 'sendChange']);
-    Route::post('/advertisement/froze/{id}',[\App\Http\Controllers\AdvertisementController::class, 'froze']);
-    Route::get('/advertisement/unfroze/{id}',[\App\Http\Controllers\AdvertisementController::class, 'unfroze']);
+    Route::post('/advertisement/send_change',[\App\Http\Controllers\AdvertisementController::class, 'sendChange']);
+    Route::post('/advertisement/froze',[\App\Http\Controllers\AdvertisementController::class, 'froze']);
+    Route::post('/advertisement/unfroze',[\App\Http\Controllers\AdvertisementController::class, 'unfroze']);
 
     Route::get('/notification', function (){return view('notification');});
     Route::post('/notification/read', [\App\Http\Controllers\NotificationController::class, 'read']);
@@ -93,3 +93,4 @@ Route::get('/dd',function (){
 
 Route::get('/add', [\App\Http\Controllers\Adder::class,'makeUser']);
 Route::get('/addDeal', [\App\Http\Controllers\Adder::class,'makeDealer']);
+Route::get('/addFrozen', [\App\Http\Controllers\Adder::class,'makeFrozen']);

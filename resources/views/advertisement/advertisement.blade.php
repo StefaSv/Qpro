@@ -200,13 +200,13 @@
                     @csrf
                     <div class="form-group">
                         <label for="desc">Описание <b>*</b></label>
-                        <textarea rows="15" name="desc" id="desc" required
-                                  placeholder="Опишите, что следует изменить в объявлении"></textarea>
-                    </div>
-                    <div class="form-group form-group-btn">
-                        <button class="btn" id="send_ch" type="submit">Отправить</button>
+                        <textarea rows="15" name="desc" id="desc" required placeholder="Опишите, что следует изменить в объявлении">
+                        </textarea>
                     </div>
                 </form>
+                    <div class="form-group form-group-btn">
+                        <button class="btn" id="send_ch">Отправить</button>
+                    </div>
             </div>
         </div>
     </div>
@@ -221,15 +221,16 @@
             </div>
             <div class="modal-body">
                 <form>
+                    @csrf
                     <div class="form-group">
                         <label for="desc_stop">Описание <b>*</b></label>
                         <textarea rows="15" name="desc_stop" id="desc_stop" required
                                   placeholder="Опишите причину приостановки объявления"></textarea>
                     </div>
-                    <div class="form-group form-group-btn">
-                        <button class="btn" type="submit">Отправить</button>
-                    </div>
                 </form>
+                    <div class="form-group form-group-btn">
+                        <button class="btn" id="info_send">Отправить</button>
+                    </div>
             </div>
         </div>
     </div>
@@ -265,7 +266,7 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-gray" href="#" data-dismiss="modal">Нет</a>
-                    <a class="btn `btn-accept`" id="unfroze" href="#">Да</a>
+                    <a class="btn `btn-accept`" id="defroze" href="#">Да</a>
                 </div>
             </div>
         </div>

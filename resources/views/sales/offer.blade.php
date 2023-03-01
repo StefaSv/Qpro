@@ -32,10 +32,10 @@
                         <h3>{{\App\Models\Car_model::find($offer['model'])['title']}}</h3></div>
                     <div class="profile-manager__head_right">
                         @if($offer['is_frozen'] == 0)
-                        <a class="btn-border" data-toggle="modal" href="#" data-target="#exampleModalCenterRead">Отправить на исправление</a>
-                        <a class="btn-border" data-toggle="modal" href="#" data-target="#exampleModalCenterChoise">Приостановить объявление</a>
+                        <a class="btn-border" href="#" id="send_re">Отправить на исправление</a>
+                        <a class="btn-border" href="#" id="send_fr">Приостановить объявление</a>
                         @else
-                        <a class="btn-border" data-toggle="modal" href="#" data-target="#exampleModalCenterDefroze">Разморозить объявленине</a>
+                        <a class="btn-border" data-toggle="modal" href="#" data-target="#exampleModalCenterDefroze" id="send_defr">Разморозить объявленине</a>
                         @endif
                     </div>
                 </div>
@@ -160,17 +160,18 @@
                     <div class="close" data-dismiss="modal" aria-label="Close"></div>
                 </div>
                 <div class="modal-body">
-                    <form action="/advertisement/send_change/{{$offer['id']}}" method="post">
+                    <form method="post">
                         @csrf
                         <div class="form-group">
                             <label for="desc">Описание <b>*</b></label>
                             <textarea rows="15" name="desc" id="desc" required
                                       placeholder="Опишите, что следует изменить в объявлении"></textarea>
                         </div>
-                        <div class="form-group form-group-btn">
-                            <button class="btn" type="submit" >Отправить</button>
-                        </div>
+                        <input id="offer_id" value="{{$offer_id}}" hidden>
                     </form>
+                    <div class="form-group form-group-btn">
+                        <button class="btn" id="send_ch">Отправить</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -184,16 +185,18 @@
                     <div class="close" data-dismiss="modal" aria-label="Close"></div>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/advertisement/froze/{{$offer['id']}}">
+                    <form>
                         @csrf
                         <div class="form-group">
                             <label for="desc_stop">Описание <b>*</b></label>
-                            <textarea rows="15" name="desc_stop" id="desc_stop" required placeholder="Опишите причину приостановки объявления"></textarea>
-                        </div>
-                        <div class="form-group form-group-btn">
-                            <button class="btn" type="submit">Отправить</button>
+                            <textarea rows="15" name="desc_stop" id="desc_stop" required
+                                      placeholder="Опишите причину приостановки объявления"></textarea>
+                            <input id="offer_id" value="{{$offer_id}}" hidden>
                         </div>
                     </form>
+                    <div class="form-group form-group-btn">
+                        <button class="btn" id="info_send">Отправить</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -211,7 +214,7 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-gray" href="#" data-dismiss="modal">Нет</a>
-                    <a class="btn btn-accept" href="#">Да</a>
+                    <a class="btn `btn-accept`" id="info_choice" href="#">Да</a>
                 </div>
             </div>
         </div>
@@ -229,7 +232,9 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-gray" href="#" data-dismiss="modal">Нет</a>
-                    <a class="btn btn-accept" href="/advertisement/unfroze/{{$offer['id']}}">Да</a>
+                    <input id="offer_id" value="{{$offer['id']}}" hidden>
+                    <input id="type_send" value="button" hidden>
+                    <a class="btn btn-accept" href="#" id="defroze">Да</a>
                 </div>
             </div>
         </div>
