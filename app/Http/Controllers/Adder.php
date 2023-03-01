@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Frozen;
 use App\Models\New_location;
+use App\Models\Offer_frozen;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Dealer;
@@ -18,6 +20,14 @@ class Adder extends Controller
             'dealerId' => 37,
             'email' => "stefansvetlichniy@gmail.com",
             'password' => Hash::make("QAZ43zaq"),
+        ]);
+    }
+
+    public function makeFrozen(){
+        Offer_frozen::create([
+            'offer_id' => 1,
+            'frozen_or_change' => 'change',
+            'text' => "wertgvcd"
         ]);
     }
 

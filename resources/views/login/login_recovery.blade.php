@@ -6,9 +6,11 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <link rel="icon" href="./public/img/icon.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="{{ asset('/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery.toast.css')}}">
 </head>
 </html>
 <body>
@@ -20,14 +22,16 @@
             </div>
             <div class="title">Восстановление пароля</div>
             <div class="desc">Для восстановления пароля введите почту,<br> на которую регистрировался аккаунт</div>
-            <form class="recovery-form" action="/login/recovery/check" method="post">
+            <form class="recovery-form" action="#" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="text" name="email" id="email" required>
                 </div>
-                <button class="btn" type="submit" id="submit">Восстановить пароль</button>
             </form>
+            <div class="form-group">
+                <button class="btn" type="submit" id="recovery">Восстановить пароль</button>
+            </div>
         </div>
     </div>
 </section>
@@ -52,4 +56,5 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js"></script>
 <script src="{{ '/js/jquery.nicescroll.min.js'}}"></script>
 <script src="{{ '/js/main.js'}}"></script>
+<script src="{{ asset('/js/jquery.toast.js')}}"></script>
 </body>

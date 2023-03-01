@@ -1264,7 +1264,7 @@ form {
 .password-form-group .show-password {
     position: absolute;
     right: 16px;
-    bottom: 11px;
+    top: 60px;
     width: 24px;
     height: 24px;
     background: url(../img/eye.svg) no-repeat center center;

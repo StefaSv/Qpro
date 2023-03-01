@@ -25,9 +25,8 @@
                     <h4>Личные данные</h4>
                     <a class="password" data-toggle="modal" data-target="#exampleModalChangePostPhone" href="#">Запросить изменение телефона или почты</a>
                 </div>
-                <form class="section-personal-data__body" action="/profile-data/set" method="post"
-                      enctype="multipart/form-data"
-                >
+                <form class="section-personal-data__body" id="profile_form" action="#" method="get"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="section-personal-data__avatar">
                         <div class="section-personal-data__avatar_image">
@@ -63,44 +62,37 @@
                         <label for="third_name">Отчество</label>
                         <input type="text" name="third_name" id="third_name" value="{{$user['third_name']}}">
                     </div>
-                    <div class="form-group justify-content-end flex-row mb-0">
-                        <button class="btn" type="submit">Сохранить изменения</button>
-                    </div>
                 </form>
+                    <div class="form-group justify-content-end flex-row mb-0">
+                        <button id="profile_send_data" class="btn">Сохранить изменения</button>
+                    </div>
             </div>
             <div class="section-personal-data__main">
                 <div class="section-personal-data__head">
                     <h4>Сменить пароль</h4>
                     <a href="#">Забыли пароль?</a>
                 </div>
-                <form class="section-personal-data__body" action="/profile-data/password-change" method="post">
+                <form class="section-personal-data__body" action="#" method="post">
                     @csrf
-                    <div class="form-group password-form-group">
-                        @error('old_password')
-                        <div class="form-group not-registered">
-                        @enderror
+                    <div class="form-group password-form-group" id="old_pass_err">
                         <label for="old_password">Старый пароль</label>
-                        <input class="@error('old_password') is-invalid @enderror" type="password" name="old_password" id="old_password" placeholder="" required>
+                        <input type="password" name="old_password" id="old_password" placeholder="" required>
                         <div class="show-password"></div>
-                        @error('old_password')
-                        <span class="error">Пароль неверный!</span>
-                        </div>
-                        @enderror
                     </div>
-                    <div class="form-group password-form-group small-group">
+                    <div class="form-group password-form-group small-group" id="new_pass_err">
                         <label for="new_password">Новый пароль</label>
                         <input type="password" name="new_password" id="new_password" placeholder="" required>
                         <div class="show-password"></div>
                     </div>
-                    <div class="form-group password-form-group small-group">
+                    <div class="form-group password-form-group small-group" id="new_pass_err">
                         <label for="repeat_new_password">Повторите новый пароль</label>
                         <input type="password" name="repeat_new_password" id="repeat_new_password" placeholder="" required>
                         <div class="show-password"></div>
                     </div>
-                    <div class="form-group justify-content-end flex-row mb-0">
-                        <button class="btn" type="submit">Сохранить пароль</button>
-                    </div>
                 </form>
+                    <div class="form-group justify-content-end flex-row mb-0">
+                        <button class="btn" id="save_pass">Сохранить пароль</button>
+                    </div>
             </div>
         </div>
     </div>

@@ -224,6 +224,7 @@ $(document).ready(() => {
       }
   });
 
+  //увольнение
   $('.fire').click(function (e){
       let id = this.id;
       $('.btn-accept').replaceWith('<a class="btn btn-accept" href="/user/fire/'+id+'">Да</a>');
@@ -231,25 +232,156 @@ $(document).ready(() => {
       //console.log(e.target.id);
   });
 
+  //отправка на исправление
   $('.send').on('click',function (e){
       let id = this.id;
-      console.log(id);
-      $('#send_ch').attr('formaction','/advertisement/send_change/'+id);
+      $('#exampleModalCenterRead').append('<input id="offer_id" hidden value="'+id+'">').modal('show');
+  });
+
+  $('#send_re').on('click',function (e){
       $('#exampleModalCenterRead').modal('show');
   });
 
+  $('#send_ch').on('click',function (){
+      let offer_id = $('#offer_id').val();
+      let text = $('#desc').val();
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $.ajax({
+          type: 'POST',
+          url: '/advertisement/send_change',
+          data:{
+              'offer_id' : offer_id,
+              'text': text,
+          },
+          success: function (data) {
+              console.log(data);
+              if (data['success'] == true){
+                  $('#exampleModalCenterRead').modal('hide');
+                  $.toast({
+                      text: '<a style = " width: 318px;  height:20px;  font-family:Gilroy; font-style:normal; font-weight:600; font-size:14px; line-height: 20px; color: #5D30C3;  flex:none;  order:0;  flex-grow:0">Объявление отправлено на исправление!</a>', // Text that is to be shown in the toast
+
+                      allowToastClose: false, hideAfter: 5000, stack: true, position: 'top-right',
+
+                      bgColor: '#ffffff', textColor: '#9900ff', textAlign: 'left', loader: false,  loaderBg: '#9EC600',
+                  });
+              }
+          },
+          error: function (data, textStatus, errorThrown) {
+              console.log(data);
+          },
+      });
+  });
+
+    //заморозка
+    $('.info').on('click',function (e){
+        let id = this.id;
+        $('#exampleModalCenterStop').append('<input id="offer_id" hidden value="'+id+'">')
+        $('#exampleModalCenterChoise').modal('show');
+    });
+
+    $('#send_fr').on('click',function (e){
+        $('#exampleModalCenterChoise').modal('show');
+    });
+
+    $('#info_choice').on('click',function (e){
+        $('#exampleModalCenterChoise').modal('hide');
+        $('#exampleModalCenterStop').modal('show');
+    });
+
+    $('#info_send').on('click',function (){
+        let offer_id = $('#offer_id').val();
+        let text = $('#desc_stop').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/advertisement/froze',
+            data:{
+                'offer_id' : offer_id,
+                'text': text,
+            },
+            success: function (data) {
+                console.log(data);
+                if (data['success'] == true){
+                    $('#send_re').remove();
+                    $('#send_fr').remove();
+                    $('.profile-manager__head_right').append('<a class="btn-border" data-toggle="modal" href="#" data-target="#exampleModalCenterDefroze" id="send_defr">Разморозить объявленине</a>');
+                    $('.send').remove();
+                    $('.froze').remove();
+                    $('.choises').append('<a class="froze" id="'+id+'" title-tooltip="Разморозить"></a>');
+                    $('#exampleModalCenterStop').modal('hide');
+                    $.toast({
+                        text: '<a style = " width: 318px;  height:20px;  font-family:Gilroy; font-style:normal; font-weight:600; font-size:14px; line-height: 20px; color: #5D30C3;  flex:none;  order:0;  flex-grow:0">Объявление заморожено!</a>', // Text that is to be shown in the toast
+
+                        allowToastClose: false, hideAfter: 5000, stack: true, position: 'top-right',
+
+                        bgColor: '#ffffff', textColor: '#9900ff', textAlign: 'left', loader: false,  loaderBg: '#9EC600',
+                    });
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+            },
+        });
+    });
+
   $('.info').click(function (e){
       let id = this.id;
-     // let id = e.target.id;
-      $('#info_choice').attr('href', '/advertisement/froze/'+id);
+      $('#info_choice');
       $('#exampleModalCenterChoise').modal('show');
   });
 
-  $('.froze').click(function (e){
-      let id = this.id;
-     // let id = e.target.id;
-      $('#unfroze').attr('href', '/advertisement/unfroze/'+id);
-      $('#exampleModalCenterDefroze').modal('show');
+  //разморозка
+    $('.froze').on('click',function (){
+        let id = this.id;
+        $('.modal-footer').append('<input id="offer_id" value="'+id+'" hidden>');
+        $('.modal-footer').append('<input id="type_send" value="icon" hidden>');
+        $('#exampleModalCenterDefroze').modal('show');
+    });
+
+
+  $('#defroze').on('click',function (){
+      let offer_id = $('#offer_id').val();
+      let type_send = $('#type_send').val();
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $.ajax({
+          type: 'POST',
+          url: '/advertisement/unfroze',
+          data:{
+              'offer_id' : offer_id,
+              'type_send': type_send,
+          },
+          success: function (data) {
+              console.log(data);
+              if (data['success'] == true){
+                  if(data['type'] == "button") {
+                      $('#send_defr').remove();
+                      $('.profile-manager__head_right').append('<a class="btn-border" href="#" id="send_re">Отправить на исправление</a>');
+                      $('.profile-manager__head_right').append('<a class="btn-border" href="#" id="send_fr">Приостановить объявление</a>');
+                  }
+                  if(data['type'] == "icon") {
+                      $('.froze').remove();
+                      $('.choises').append('<a class="send" id="' + data['id'] + '" title-tooltip="Отправить на исправление"></a>');
+                      $('.choises').append('<a class="info" id="' + data['id'] + '" title-tooltip="Приостановить объявление"></a>');
+                  }
+                  $('#exampleModalCenterDefroze').modal('hide');
+              }
+          },
+          error: function (data, textStatus, errorThrown) {
+              console.log(data);
+          },
+      });
   });
 
   $('#choice_pay').click(function () {
@@ -380,28 +512,14 @@ $(document).ready(() => {
                     let err_mail = $('#err_mail');
                     let err_phone = $('#err_phone');
                     console.log(err_mail.length, err_phone.length);
-                    if (data['error'] == 'email_registered' && err_mail.length == 0 ) {
+                    if (data['error'] == 'email_registered' && err_mail.length == 0) {
                         $('#div_e_mail').append('<a id="err_mail"  style="color: #d05050">Почта уже зарегестрирована</a>');
-                        $.toast({
-                            text: 'df',//'<a style = " width:196px  height:20px  font-family:\'Gilroy\' font-style:normal font-weight:600 font-size:14px line-height: 20px color: #5D30C3  flex:none  order:0  flex-grow:0">Данные успешно сохранены!</a>', // Text that is to be shown in the toast
-                            showHideTransition: 'fade', // fade, slide or plain
-                            allowToastClose: false, // Boolean value true or false
-                            hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-                            stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-                            position: 'top-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-
-                            bgColor: '#ffffff',  // Background color of the toast
-                            textColor: '#9900ff',  // Text color of the toast
-                            textAlign: 'left',  // Text alignment i.e. left, right or center
-                            loader: false,  // Whether to show loader or not. True by default
-                            loaderBg: '#9EC600',  // Background color of the toast loader
-                        });
                     } else if (data['error'] != 'email_registered') {
                         err_mail.remove();
                     }
                     if (data['error'] == 'phone_registered' && err_phone.length == 0) {
                         $('#div_phone').append('<a id="err_phone" style="color: #d05050">Телефон уже зарегестрирован</a>');
-                    } else {
+                    } else if (data['error'] != 'phone_registered') {
                         err_phone.remove();
                     }
                 }
@@ -413,7 +531,177 @@ $(document).ready(() => {
         });
   });
 
+    $('#profile_send_data').click(function (){
+        console.log(phone);
+        var data = new FormData();
+        let name = $('#first_name').val();
+        let last_name = $('#last_name').val();
+        let third_name = $('#third_name').val();
+        data.append('name', name);
+        data.append('last_name', last_name);
+        data.append('third_name', third_name);
+        console.log(data);
 
+        jQuery.each(jQuery('#avatar_file')[0].files, function(i, file) {
+            data.append('file', file);
+            console.log(file['size']);
+            if(file['size'] > 52428800){check = 0}
+        });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/profile-data/set',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                if (data['success'] == true){
+                        $.toast({
+                            title: "Заголовок",
+                            text: '<a style = " width: 318px;  height:20px;  font-family:Gilroy; font-style:normal; font-weight:600; font-size:14px; line-height: 20px; color: #5D30C3;  flex:none;  order:0;  flex-grow:0">Данные успешно сохранены!</a>', // Text that is to be shown in the toast
+                            allowToastClose: false, // Boolean value true or false
+                            hideAfter: 5000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                            stack: true, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                            position: 'top-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+                            bgColor: '#ffffff',  // Background color of the toast
+                            textColor: '#9900ff',  // Text color of the toast
+                            textAlign: 'left',  // Text alignment i.e. left, right or center
+                            loader: false,  // Whether to show loader or not. True by default
+                            loaderBg: '#9EC600',  // Background color of the toast loader
+                        });
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+
+            },
+        });
+    });
+
+    $('#recovery').click(function (){
+        var data = new FormData();
+        let email = $('#email').val();
+        data.append('email', email);
+        console.log(data);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/login/recovery/check',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                if (data['success'] == true){
+                    $.toast({
+                        text: '<a style = " width: 196px;  height:20px;  font-family:Gilroy; font-style:normal; font-weight:600; font-size:14px; line-height: 20px; color: #5D30C3;  flex:none;  order:0;  flex-grow:0">Новый пароль отправлен Вам на почту!</a><a style="width: 318px;\n' +
+                            'height: 60px;\n' +
+                            'font-family: \'Gilroy\';\n' +
+                            'font-style: normal;\n' +
+                            'font-weight: 500;\n' +
+                            'font-size: 14px;\n' +
+                            'line-height: 20px;\n' +
+                            'color: #98969E;\n' +
+                            'flex: none;\n' +
+                            'order: 1;\n' +
+                            'align-self: stretch;\n' +
+                            'flex-grow: 0;">Проверьте свою почту, письмо должно прийти в течение 10 минут. Если письмо не пришло, проверьте папку «Спам».</a>', // Text that is to be shown in the toast
+                        allowToastClose: false, // Boolean value true or false
+                        hideAfter: 10000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                        stack: true, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                        position: 'top-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+                        bgColor: '#ffffff',  // Background color of the toast
+                        textColor: '#9900ff',  // Text color of the toast
+                        textAlign: 'left',  // Text alignment i.e. left, right or center
+                        loader: false,  // Whether to show loader or not. True by default
+                        loaderBg: '#9EC600',  // Background color of the toast loader
+                    });
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+
+            },
+        });
+    });
+
+    $('#save_pass').click(function (){
+        var data = new FormData();
+        let old_password = $('#old_password').val();
+        let new_password = $('#new_password').val();
+        let repeat_new_password = $('#repeat_new_password').val();
+        data.append('old_password', old_password);
+        data.append('new_password', new_password);
+        data.append('repeat_new_password', repeat_new_password);
+        console.log(data);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/profile-data/password-change',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+
+                if (data['success'] == true){
+                    $('#err_pass').remove();
+                    $('#err_new').remove();
+                    $.toast({
+                        text: '<a style = "width: 196px;  height:20px;  font-family:Gilroy; font-style:normal; font-weight:600; font-size:14px; line-height: 20px; color: #5D30C3;  flex:none;  order:0;  flex-grow:0">Пароль успешно изменён!</a>',
+                        allowToastClose: false, // Boolean value true or false
+                        hideAfter: 5000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                        stack: true, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                        position: 'top-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+                        bgColor: '#ffffff',  // Background color of the toast
+                        textColor: '#9900ff',  // Text color of the toast
+                        textAlign: 'left',  // Text alignment i.e. left, right or center
+                        loader: false,  // Whether to show loader or not. True by default
+                        loaderBg: '#9EC600',  // Background color of the toast loader
+                    });
+                }
+                if (data['success'] == false){
+                    let err_pass = $('#err_pass');
+                    let err_new = $('#err_new');
+                    console.log(err_pass.length, err_new.length);
+                    if (data['error'] == 'password_wrong' && err_pass.length == 0) {
+                        console.log('неправильный пароль');
+                        $('#old_pass_err').append('<a id="err_pass"  style="color: #d05050">Текущий пароль указан неверно</a>');
+                    }  else if (data['error'] != 'password_wrong') {
+                        err_pass.remove();
+                    }
+                    if (data['error'] == 'new_different' && err_new.length == 0) {
+                        $('#new_pass_err').append('<a id="err_new" style="color: #d05050">Новые пароли не совпадают</a>');
+                    } else if (data['error'] != 'password_wrong') {
+                        err_new.remove();
+                    }
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+
+            },
+        });
+    });
 
 
 
@@ -426,13 +714,6 @@ $(document).ready(() => {
   });
   let getVal = undefined;
 
-  // $('#desc').change( function(e) {
-  //     getVal = (this).value;
-  //     console.log(getVal);
-  //       if ( getVal != '') {
-  //           $("#send_ch").removeAttr("disabled");
-  //       }
-  // });
 
 
     $('#org_type').select2().on('change.select2', function() {
@@ -540,6 +821,34 @@ $(document).ready(() => {
     }, 10000)
   })
 
+    $('form#profile_form').validate({
+        // debug: true,
+        errorClass: 'error help-inline',
+        // validClass: 'success',
+        errorElement: 'span',
+        highlight: function(element, errorClass, validClass) {
+            $(element).parents("div.form-group").addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents(".error").removeClass(errorClass).addClass(validClass);
+        },
+        rules: {
+            'first_name': {
+                required: true,
+            },
+            'last_name': {
+                required: true,
+            },
+        },
+        messages: {
+            'first_name': {
+                required: 'Пожалуйста, введите имя',
+            },
+            'last_name': {
+                required: 'Пожалуйста, введите фамилию',
+            },
+        },
+    });
 
   $('form#registration').validate({
     // debug: true,
@@ -857,12 +1166,12 @@ $(document).ready(() => {
       $( this ).find( ".custom-tooltip" ).remove();
     });
   });
-  $('.modal-footer .btn-accept').on('click', function () {
-    $('#exampleModalCenterChoise').modal('hide');
-    setTimeout(() => {
-      $('#exampleModalCenterStop').modal('show');
-    }, 500)
-  });
+  // $('.modal-footer .btn-accept').on('click', function () {
+  //   $('#exampleModalCenterChoise').modal('hide');
+  //   setTimeout(() => {
+  //     $('#exampleModalCenterStop').modal('show');
+  //   }, 500)
+  // });
 
     $('.check').each(function () {
         var tooltipTitle = $(this).attr('title-tooltip');

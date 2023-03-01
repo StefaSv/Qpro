@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="{{ asset('/css/style.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/css/inet.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery.toast.css')}}">
 
 
 </head>
@@ -98,4 +99,5 @@
     <script src = "{{asset('js/datatables.js')}}"></script>
     <script src = "{{asset('js/main.js')}}"></script>
     <script src = "{{asset('js/booststrap.js')}}"></script>
+    <script src="{{ asset('/js/jquery.toast.js')}}"></script>
 </body>

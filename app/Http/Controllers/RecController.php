@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\RecoverPassword;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,13 +20,19 @@ class RecController extends Controller
 
         $user = User::where('email', $request['email'])->first();
         if ($user == null) {
-            return redirect('/login/recovery');
+            return response()->json([
+                'success' => false,
+                'error' => 'undefined_user'
+            ]);
         } else {
             $data = 2222;
 
-            $res = $this->sendEmail("stefansvetlichniy@gmail.com", "message_pass", $data, "123");
+            //$res = $this->sendEmail("stefansvetlichniy@gmail.com", "message_pass", $data, "123");
 
-            dd($res);
+            //dd($res);
+            return response()->json([
+                'success' => true,
+            ]);
         }
 
     }
