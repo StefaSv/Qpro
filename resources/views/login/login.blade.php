@@ -30,7 +30,7 @@
                 <div class="form-group password-form-group">
                     <label for="password">Пароль</label>
                     <input class="@error('password') is-invalid @enderror" type="password" name="password" id="password" placeholder="Введите пароль"  required>
-                    <div class="show-password"></div>
+                    <div class="show-password"  style="top: 35px"></div>
                     @error('password')
                         <span class="error">{{$message}}</span>
                     @enderror

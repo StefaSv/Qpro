@@ -307,6 +307,7 @@ $(document).ready(() => {
             data:{
                 'offer_id' : offer_id,
                 'text': text,
+                'type': "icon",
             },
             success: function (data) {
                 console.log(data);
@@ -318,8 +319,23 @@ $(document).ready(() => {
                   }
                   if(data['type'] == "icon"){
                     $('.send').remove();
-                    $('.froze').remove();
-                    $('.choises').append('<a class="froze" id="'+id+'" title-tooltip="Разморозить"></a>');
+                    $('.info').remove();
+                    $('.choises').append('<a class="froze" id="'+data['id']+'" title-tooltip="Разморозить"></a>');
+                    $('.choises a').each(function () {
+                      var tooltipTitle = $(this).attr('title-tooltip');
+                      $( this ).mouseenter(function(){
+                        $( this ).append( "<span class='custom-tooltip'>"+tooltipTitle+"</span>" );
+                      });
+                      $( this ).mouseleave(function(){
+                        $( this ).find( ".custom-tooltip" ).remove();
+                      });
+                      $('.froze').on('click',function (){
+                        let id = this.id;
+                        $('.modal-footer').append('<input id="offer_id" value="'+id+'" hidden>');
+                        $('.modal-footer').append('<input id="type_send" value="icon" hidden>');
+                        $('#exampleModalCenterDefroze').modal('show');
+                    });
+                    });
                   }
                     $('#exampleModalCenterStop').modal('hide');
                     $.toast({
@@ -337,11 +353,11 @@ $(document).ready(() => {
         });
     });
 
-  $('.info').click(function (e){
-      let id = this.id;
-      $('#info_choice');
-      $('#exampleModalCenterChoise').modal('show');
-  });
+  // $('.info').click(function (e){
+  //     let id = this.id;
+  //     $('#info_choice');
+  //     $('#exampleModalCenterChoise').modal('show');
+  // });
 
   //разморозка
     $('.froze').on('click',function (){
@@ -379,9 +395,28 @@ $(document).ready(() => {
                       $('.froze').remove();
                       $('.choises').append('<a class="send" id="' + data['id'] + '" title-tooltip="Отправить на исправление"></a>');
                       $('.choises').append('<a class="info" id="' + data['id'] + '" title-tooltip="Приостановить объявление"></a>');
+                      
+                      $('.choises a').each(function () {
+                        var tooltipTitle = $(this).attr('title-tooltip');
+                        $( this ).mouseenter(function(){
+                          $( this ).append( "<span class='custom-tooltip'>"+tooltipTitle+"</span>" );
+                        });
+                        $( this ).mouseleave(function(){
+                          $( this ).find( ".custom-tooltip" ).remove();
+                        });
+                      });
+                      $('.info').click(function (e){
+                        let id = this.id;
+                        $('#info_choice');
+                        $('#exampleModalCenterChoise').modal('show');
+                      });
+                      $('.send').on('click',function (e){
+                        let id = this.id;
+                        $('#exampleModalCenterRead').append('<input id="offer_id" hidden value="'+id+'">').modal('show');
+                      });
                   }
                   $('#exampleModalCenterDefroze').modal('hide');
-              }
+                }
           },
           error: function (data, textStatus, errorThrown) {
               console.log(data);
@@ -739,16 +774,11 @@ $(document).ready(() => {
     });
 
     $('#region').select2().on('change.select2', function(e) {
-        getVal = e.target.value;
-        console.log(getVal);
         if ( getVal != '') {
             $("#brand").prop("disabled", false);
         }
-    });
-    $('#tariff').select2();
-    $('#brand').select2().on('change.select2', function(e) {
-        let loc_id = getVal;
-        let brand_id = e.target.value;
+        let loc_id = $('#region').val();
+        let brand_id = $('#brand').val();
         console.log(loc_id);
         console.log(brand_id);
         if ( brand_id != '') {
@@ -765,8 +795,90 @@ $(document).ready(() => {
                     'brand_id': brand_id,
                 },
                 success: function (data) {
+                  console.log(data);
+                  if (data.length != 0){
+                    $('#center').empty();
+                    $('#center').select2({data:data});
+                  };
+                  if (data.length == 0){
+                    var atad = [{id:0,text: "Выберите из списка", disabled:true},];
+                    console.log(atad);
+                    $('#center').empty();
+                    $('#center').select2({data:atad , placeholder:"Выберите из списка"});
+                  };
+                },
+                error: function (data, textStatus, errorThrown) {
                     console.log(data);
-                    $('#center').select2({data:data})
+
+                },
+            });
+        }
+    });
+
+    //выбор диллерского центра
+    $('#send_request').on('click', function(e) {
+      let center = $('#center').val();
+      console.log(center);
+      if(center != null){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/registration/check',
+            data: {
+              'center': center,
+            },
+            success: function (data) {
+              window.location.href=data['ref'];
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+            },
+        });
+      }else{
+        $('#center_choice').append('<a id="err_center"  style="color: #d05050">Выберите дилерский центр или зарегистрируйте новый</a>');
+      }
+  });
+
+
+    $('#center').select2().on('change.select2', function(e) {
+          $("#send_request").removeAttr("disabled");
+          $('err_center').remove();
+  });
+    $('#tariff').select2();
+    $('#brand').select2().on('change.select2', function(e) {
+      let loc_id = $('#region').val();
+      let brand_id = $('#brand').val();
+      console.log(loc_id);
+      console.log(brand_id);
+        if ( brand_id != '') {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/registration/set-dealers',
+                data: {
+                    'loc_id': loc_id,
+                    'brand_id': brand_id,
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.length != 0){
+                      $('#center').empty();
+                      $('#center').select2({data:data});
+                    };
+                    if (data.length == 0){
+                      var atad = [{id:0,text: "Выберите из списка", disabled:true},];
+                      console.log(atad);
+                      $('#center').empty();
+                      $('#center').select2({data:atad , placeholder:"Выберите из списка"});
+                    };
                 },
                 error: function (data, textStatus, errorThrown) {
                     console.log(data);

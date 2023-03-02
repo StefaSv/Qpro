@@ -72,6 +72,10 @@ class RegistrationController extends Controller
                 }
             }
         }
+        // $data[1] = [
+        //     'id' => 0,
+        //     'text' => "Выберите из списка",
+        // ];
         $data = array_values($data);
         return response()->json($data);
     }
@@ -97,12 +101,12 @@ class RegistrationController extends Controller
         //}
         if(Auth::user()['confirmed'] == 1) {
             if (is_null($dealer['full_name'])) {
-                return redirect('/profile-DC');
+                return response()->json(['ref' => "/profile-DC"]);
             } else {
-                return redirect('/profile-DC/full');
+                return response()->json(['ref' => "/profile-DC/full"]);
             }
         }else{
-            return redirect('registration/accepted');
+            return response()->json(['ref' => "/registration/accepted"]);
         }
     }
 

@@ -23,7 +23,7 @@
         <div class="section-registration__main section-login__main">
             <div class="title">Заявка на добавление ДЦ</div>
             <div class="desc">Выберите дилерский центр, к которому будет привязан аккаунт</div>
-            <form id="request" action="/registration/check" method="post">
+            <form>
                 @csrf
                 <div class="form-group">
                     <label for="region">Регион<b>*</b></label>
@@ -44,17 +44,17 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="center_choice">
                     <label for="center">Дилерский центр<b>*</b></label>
                     <select name="center" id="center" disabled>
                         <option value="" selected="selected" disabled="disabled">Выберите из списка</option>
                     </select>
                 </div>
                 <div class="form-group not-found-center disabled">
-                    <a href="/registration/new-DC">Не нашёл свой дилерский центр</a>
+                    <a href="/registration/new-DC" >Не нашёл свой дилерский центр</a>
                 </div>
                 <div class="form-group-block">
-                    <button class="btn" type="submit" id="send_request">Продолжить</button>
+                    <a class="btn" href="#" id="send_request" style="cursor:pointer">Продолжить</a>
                 </div>
             </form>
         </div>
@@ -81,16 +81,4 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js"></script>
 <script src="{{ asset('/js/jquery.nicescroll.min.js')}}"></script>
 <script src="{{ asset('/js/main.js')}}"></script>
-{{--<script>$('#region').select2().on('change.select2', function(e) {--}}
-{{--        let getVal = e.target.value;--}}
-{{--        console.log(getVal);--}}
-{{--        if ( getVal != '') {--}}
-{{--            $("#opt_brand").prepend(--}}
-{{--                @foreach(\App\Models\Brand::all() as $brand)--}}
-{{--                    <option value="{{$brand['title']}}"><?php $brand['title'] ?></option>)--}}
-{{--                @endforeach--}}
-{{--            $("#brand").prop("disabled", false);--}}
-{{--        }--}}
-
-{{--    });</script>--}}
 </body>

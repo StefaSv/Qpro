@@ -20,8 +20,10 @@ class ProfileUserController extends Controller
         if(!is_null($request['third_name'])){
             $db->update(['third_name' => $request['third_name']]);
         }
-        if($request->hasFile('avatar_file')){
-            $path = "/storage/".$request->file('avatar_file')->store('uploads', 'public');
+        if($request->hasFile('file')){
+            $path = "/storage/".$request->file('file')->store('uploads', 'public');
+            $path = str_replace('/storage', '/storage/app/public', $path);
+
             DB::table('user')
                 ->where('id','=',Auth::id())
                 ->update(['avatar' => $path]);

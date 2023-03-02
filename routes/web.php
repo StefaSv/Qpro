@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function(){
 
 
 Route::get('/dd',function (){
-    dd(\Illuminate\Support\Facades\Auth::user());
+    dd(App\Models\User::where('email', 'S1mple_x3m@mail.ru')->get());
 });
 
 Route::get('/add', [\App\Http\Controllers\Adder::class,'makeUser']);

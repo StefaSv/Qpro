@@ -31,7 +31,7 @@
                     <div class="section-personal-data__avatar">
                         <div class="section-personal-data__avatar_image">
                             @if(isset($user['avatar']))
-                            <img src="{{asset($user['avatar'])}}" alt="avatar">
+                            <img src="{{$user['avatar']}}" alt="avatar">
                             @else
                             <img src="{{asset('/img/avatar.jpg')}}" alt="avatar">
                             @endif

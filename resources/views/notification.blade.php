@@ -57,10 +57,12 @@
 
 
             <div class="section-notification__right">
+                @if($notifications->count() != 0)
                 <h3 id="titleB">{{$notifications[0]['title']}}</h3>
                 <div class="section-notification__right_full-text">
                     {{$notifications[0]['message']}}
                 </div>
+                @endif
             </div>
         </div>
     </div>
