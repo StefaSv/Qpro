@@ -35,6 +35,7 @@ class AdvertisementController extends Controller
         );
         return response()->json([
             'success' => true,
+            'type' => $request['type_send'],
         ]);
     }
 

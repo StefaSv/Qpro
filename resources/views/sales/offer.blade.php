@@ -192,6 +192,7 @@
                             <textarea rows="15" name="desc_stop" id="desc_stop" required
                                       placeholder="Опишите причину приостановки объявления"></textarea>
                             <input id="offer_id" value="{{$offer_id}}" hidden>
+                            <input id="type_send" value="button" hidden>
                         </div>
                     </form>
                     <div class="form-group form-group-btn">

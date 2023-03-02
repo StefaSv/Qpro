@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Offer_frozen extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-      'id',
-      'chat_id',
-      'user_id',
-      'is_active',
-    ];
+    protected $table = 'offer_frozen';
+
+    protected $fillable = ['offer_id', 'frozen_or_change', 'text'];
+
 }

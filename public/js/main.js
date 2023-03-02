@@ -279,7 +279,8 @@ $(document).ready(() => {
     //заморозка
     $('.info').on('click',function (e){
         let id = this.id;
-        $('#exampleModalCenterStop').append('<input id="offer_id" hidden value="'+id+'">')
+        $('#exampleModalCenterStop').append('<input id="offer_id" hidden value="'+id+'">');
+        $('#exampleModalCenterStop').append('<input id="type_send" hidden value="icon">');
         $('#exampleModalCenterChoise').modal('show');
     });
 
@@ -310,12 +311,16 @@ $(document).ready(() => {
             success: function (data) {
                 console.log(data);
                 if (data['success'] == true){
+                  if(data['type'] == "button"){
                     $('#send_re').remove();
                     $('#send_fr').remove();
                     $('.profile-manager__head_right').append('<a class="btn-border" data-toggle="modal" href="#" data-target="#exampleModalCenterDefroze" id="send_defr">Разморозить объявленине</a>');
+                  }
+                  if(data['type'] == "icon"){
                     $('.send').remove();
                     $('.froze').remove();
                     $('.choises').append('<a class="froze" id="'+id+'" title-tooltip="Разморозить"></a>');
+                  }
                     $('#exampleModalCenterStop').modal('hide');
                     $.toast({
                         text: '<a style = " width: 318px;  height:20px;  font-family:Gilroy; font-style:normal; font-weight:600; font-size:14px; line-height: 20px; color: #5D30C3;  flex:none;  order:0;  flex-grow:0">Объявление заморожено!</a>', // Text that is to be shown in the toast
