@@ -4,7 +4,7 @@
     <?php
     $offer = \App\Models\Offer::find($offer_id);
     $colors = unserialize($offer['color']);
-    ?>
+    ?> 
     <div class="header-bottom">
         <ul class="list">
             <li><a href="/profile-DC">Профиль ДЦ</a></li>
