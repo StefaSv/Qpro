@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class SupportController extends Controller
 {
     public function getMessages(){
-        $data = [];
+        $data = []; 
         $chat = Chat::where('user_id', Auth::id())->first();
         if ($chat == null){
             return response();
