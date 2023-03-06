@@ -214,6 +214,7 @@ $(document).ready(() => {
                       $('.section-support__content').append('<div class="section-support__content_item sended"><p>' + data[0] + '</p><img style="max-width: 500px" src="' + data[2] + '"><div class="section-support__content_time">' + data[1] + '</div></div>');
                   }
                   $('#message').replaceWith('<textarea rows="1" name="message" id="message" placeholder="Начните писать..."></textarea>');
+                  $('#file')[0].value = "";
               },
               error: function (data, textStatus, errorThrown) {
                   console.log(data);
@@ -435,7 +436,7 @@ $(document).ready(() => {
           }
       }
       console.log(num_null);
-      if (num_null == 0){
+      if (num_null < 2){
           let val = $('#select2-tariff-container').attr('title');
           $('#choice_pay_form').append('<input id="days" name="days" value="'+val+'" type="hidden"></input>');
           $('#exampleModalReceipt').modal('show');

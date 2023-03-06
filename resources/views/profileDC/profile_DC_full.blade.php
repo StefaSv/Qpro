@@ -143,7 +143,17 @@
                     @else
                         <div class="text-gray mb-3">
                             <div class="form-group" style="margin-top: 8px">
-                                <a class="btn" id="choice_pay" href="#">Начать пользоваться</a>
+                                <div class="paid-and-active">
+                                    <div class="date" style = 
+                                    "margin-right:40px; 
+                                    font-size: 22px; 
+                                    font-weight: 400; 
+                                    text-decoration:line-through;">99 000 ₽</div>
+                                    <div class="date" style=
+                                    "font-size: 22px; 
+                                    font-weight: 400;">49 000 ₽</div>
+                            </div>
+                                <a class="btn" id="choice_pay" href="#" style="margin-top: 5px; margin-bottom: 5px;">Начать пользоваться</a>
 {{--                                <form method="post">--}}
 {{--                                    <label for="tariff">Выберите тип подписки:</label>--}}
 {{--                                    <select name="tariff" id="tariff">--}}
@@ -161,7 +171,7 @@
                     @endif
                 </div>
                 <div class="inactive-profile__main_right-bottom">
-                    <div class="text-gray">В данный мосент доступ ограничен к приложению для сотрудников автосалона Qseller
+                    <div class="text-gray">В данный момент доступ ограничен к приложению для сотрудников автосалона Qseller
                     </div>
                     @if(isset($wait_pay) or isset($active_pay))
                     <a class="btn-gray" id="choice_pay1" href="#" hidden>Сформировать счёт</a>

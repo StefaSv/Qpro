@@ -29,7 +29,7 @@
             <div class="section-support">
                 <div class="section-support__head">Подробно опишите Вашу проблему или вопрос оператору</div>
                 <div class="section-support__content">
-{{--                                            <div class="section-support__content_item sended"><p>Сообщение от директора</p>--}}
+<!-- {{--                                            <div class="section-support__content_item sended"><p>Сообщение от директора</p>--}}
 {{--                                                <div class="section-support__content_time">время</div>--}}
 {{--                                            </div>--}}
 {{--                                            <div class="section-support__content_item new-message"><p>Сооьщение от админа</p>--}}
@@ -39,7 +39,7 @@
 {{--                                        <div class="text-end-conv">--}}
 {{--                                            Оператор закрыл ваш вопрос--}}
 {{--                                        </div>--}}
-{{--                                    </div>--}}
+{{--                                    </div>--}} -->
                 </div>
                 <form id="send_message" class="section-support__footer position-relative">
                     @csrf

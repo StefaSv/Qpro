@@ -72,10 +72,7 @@ class RegistrationController extends Controller
                 }
             }
         }
-        // $data[1] = [
-        //     'id' => 0,
-        //     'text' => "Выберите из списка",
-        // ];
+
         $data = array_values($data);
         return response()->json($data);
     }

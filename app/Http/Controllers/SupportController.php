@@ -38,6 +38,7 @@ class SupportController extends Controller
         }
         if($request->hasFile('file-0')){
             $path = "/storage/".$request->file('file-0')->store('uploads', 'public');
+            $path = str_replace('/storage', '/storage/app/public', $path);
         }elseif ($request['message'] == null){
             return response();
         }
