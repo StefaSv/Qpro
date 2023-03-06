@@ -17,9 +17,9 @@ class RegistrationController extends Controller
 
     public function set(Request $request){
         $double_user = User::where('email', $request['email'])->first();
-        if ($double_user == null) {
+        if ($double_user == null || $double_user['dealerId'] == null) {
             $double_user = User::where('phone', $request['phone'])->first();
-            if ($double_user == null) {
+            if ($double_user == null || $double_user['dealerId'] == null) {
                 $sms = new SmsApi();
                 $phone = str_replace("+", "", $request['phone']);
                 $return = $sms->sendCallTel($phone);
@@ -81,8 +81,9 @@ class RegistrationController extends Controller
         if(Auth::user()['sms'] == $request['pincode']){
             return redirect('/registration/choice-DC');
         }else{
-            DB::table('user')->find(Auth::id())->delete();
+            $user = Auth::user();
             Auth::logout();
+            $user->delete();
         }
         return view('registration.registration',);
     }
