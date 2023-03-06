@@ -13,4 +13,7 @@ class Offer_frozen extends Model
 
     protected $fillable = ['offer_id', 'frozen_or_change', 'text'];
 
+
+
 }
+
