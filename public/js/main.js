@@ -1270,7 +1270,7 @@ $('.section-login-first').each(function () {
     }
   }
   function toggleEye() {
-    this.classList.toggle('hide')
+    this.classList.toggle('hide');
   }
 
 
