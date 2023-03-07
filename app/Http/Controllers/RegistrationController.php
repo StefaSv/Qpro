@@ -81,7 +81,7 @@ class RegistrationController extends Controller
         if(Auth::user()['sms'] == $request['pincode']){
             return redirect('/registration/choice-DC');
         }else{
-            $user = Auth::user();
+            $user = User::find(Auth::id());
             Auth::logout();
             $user->delete();
         }
