@@ -29,8 +29,10 @@
                     <label for="region">Регион<b>*</b></label>
                     <select name="region" id="region">
                         <option value="" selected="selected" disabled="disabled">Выберите из списка</option>
-                            @foreach(\App\Models\New_location::all() as $location)
-                                <option value="{{$location['id']}}">{{$location['title']}}</option>
+                            <option value="42">Москва и МО</option>
+                            <option value="37">Ленинградская область</option>
+                            @foreach(\App\Models\New_location::where('id','!=',42)->where('id','!=',37)->get() as $location)
+                            <option value="{{$location['id']}}">{{$location['title']}}</option>
                             @endforeach
                     </select>
                 </div>
