@@ -40,7 +40,7 @@
                         <option id ="opt_brand" value="" selected="selected" disabled="disabled">Выберите из списка</option>
                         <option value="64">МУЛЬТИБРЕНД (Неофициальные дилеры)</option>
                         @foreach(\App\Models\Brand::all()->sortBy('title') as $brand)
-                            <option value="{{$brand['id']}}">{{$brand['title']}} {{$brand['address']}}</option>
+                            <option value="{{$brand['id']}}">{{$brand['title']}}</option>
                         @endforeach
                     </select>
                 </div>

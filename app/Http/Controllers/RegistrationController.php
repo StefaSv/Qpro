@@ -62,13 +62,13 @@ class RegistrationController extends Controller
             if (gettype($brands) != 'boolean'){
                 foreach ($brands as $brand){
                     if ($brand == $request['brand_id']){
-                        $data[$dealer['id']]= ['id' => $dealer['id'], 'text' => $dealer['title']];
+                        $data[$dealer['id']]= ['id' => $dealer['id'], 'text' => $dealer['title']." (".$dealer['address'].")"];
                         continue;
                     }
                 }
             }else{
                 if ($brands == $request['brand_id']){
-                    $data[$dealer['id']] = ['id' => $dealer['id'], 'text' => $dealer['title']];
+                    $data[$dealer['id']] = ['id' => $dealer['id'], 'text' => $dealer['title']." (".$dealer['address'].")"];
                 }
             }
         }
