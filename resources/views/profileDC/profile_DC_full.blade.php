@@ -36,7 +36,7 @@
                         <div class="title-bold">{{$dealer['title']}}</div>
                         <div class="block-adress">
                             <div class="text-gray">Адрес</div>
-                            <div class="adress">{{$dealer['post_address']}}</div>
+                            <div class="adress">{{$dealer['address']}}</div>
                         </div>
                         <div class="block-adress">
                             <div class="text-gray">Сайт</div>
@@ -144,13 +144,13 @@
                         <div class="text-gray mb-3">
                             <div class="form-group" style="margin-top: 8px">
                                 <div class="paid-and-active">
-                                    <div class="date" style = 
-                                    "margin-right:40px; 
-                                    font-size: 22px; 
-                                    font-weight: 400; 
+                                    <div class="date" style =
+                                    "margin-right:40px;
+                                    font-size: 22px;
+                                    font-weight: 400;
                                     text-decoration:line-through;">99 000 ₽</div>
                                     <div class="date" style=
-                                    "font-size: 22px; 
+                                    "font-size: 22px;
                                     font-weight: 400;">49 000 ₽</div>
                             </div>
                                 <a class="btn" id="choice_pay" href="#" style="margin-top: 5px; margin-bottom: 5px;">Начать пользоваться</a>
