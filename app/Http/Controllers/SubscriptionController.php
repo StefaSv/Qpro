@@ -45,7 +45,7 @@ class SubscriptionController extends Controller
                         for ($i = 0; $i < $num_offers; $i++) {
                             DB::table('offers')
                                 ->where('id', '=', $offers[$i]['id'])
-                                ->update(['is_frozen' => 1]);
+                                ->update(['is_frozen_hard' => 1]);
                         }
                     }
                 });

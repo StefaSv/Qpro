@@ -396,7 +396,7 @@ $(document).ready(() => {
                       $('.froze').remove();
                       $('.choises').append('<a class="send" id="' + data['id'] + '" title-tooltip="Отправить на исправление"></a>');
                       $('.choises').append('<a class="info" id="' + data['id'] + '" title-tooltip="Приостановить объявление"></a>');
-                      
+
                       $('.choises a').each(function () {
                         var tooltipTitle = $(this).attr('title-tooltip');
                         $( this ).mouseenter(function(){

@@ -88,27 +88,31 @@
                                 <tbody>
                                 @foreach($managers as $manager)
                                     @foreach(\App\Models\Offer::where('managerId', $manager['id'])->get() as $offer)
-                                        <td>
-                                            <a class="name-table-cell" href="/sales/offer/{{$offer['id']}}">{{\App\Models\Car_model::find($offer['model'])['title']}}, {{$offer['volume']}} л, {{$offer['power']}} л.с,
-                                                {{\App\Models\Transmission::find($offer['transmission'])['title']}}, {{\App\Models\Driveunit::find($offer['drive'])['title']}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="name-table-cell" href="/sales/profile-manager/{{$manager['id']}}">
-                                                {{$manager['name']}} {{$manager['surname']}} {{$manager['third_name']}}
-                                            </a>
-                                        </td>
-                                        <td>{{$offer['cost']}} ₽</td>
-                                        <td>
-                                            <div class="choises">
-                                                @if($offer['is_frozen'] == 1)
-                                                    <a class="froze" id="{{$offer['id']}}" title-tooltip="Разморозить"></a>
-                                                @else
-                                                    <a class="send" id="{{$offer['id']}}" title-tooltip="Отправить на исправление"></a>
-                                                    <a class="info" id="{{$offer['id']}}" title-tooltip="Приостановить объявление"></a>
-                                                @endif
-                                            </div>
-                                        </td>
+                                        <tr>
+                                            <td>
+                                                <a class="name-table-cell" href="/sales/offer/{{$offer['id']}}">{{\App\Models\Car_model::find($offer['model'])['title']}}, {{$offer['volume']}} л, {{$offer['power']}} л.с,
+                                                    {{\App\Models\Transmission::find($offer['transmission'])['title']}}, {{\App\Models\Driveunit::find($offer['drive'])['title']}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="name-table-cell" href="/sales/profile-manager/{{$manager['id']}}">
+                                                    {{$manager['name']}} {{$manager['surname']}} {{$manager['third_name']}}
+                                                </a>
+                                            </td>
+                                            <td>{{$offer['cost']}} ₽</td>
+                                            <td>
+                                                <div class="choises">
+                                                    @if($offer['is_frozen'] == 1)
+                                                        <a class="froze" id="{{$offer['id']}}" title-tooltip="Разморозить"></a>
+                                                    @elseif ($offer['is_frozen_hard'] == 1)
+                                                    <a class="froze_hard" id="{{$offer['id']}}" title-tooltip="Оплатите для использования"></a>
+                                                    @else
+                                                        <a class="send" id="{{$offer['id']}}" title-tooltip="Отправить на исправление"></a>
+                                                        <a class="info" id="{{$offer['id']}}" title-tooltip="Приостановить объявление"></a>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 @endforeach
                                 </tbody>

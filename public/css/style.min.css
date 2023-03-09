@@ -2290,6 +2290,11 @@ h3 {
     cursor: pointer;
 }
 
+.section-sales__table table .choises .froze_hard {
+    background: url(../img/snow.svg) no-repeat center center;
+    cursor: pointer;
+}
+
 .section-sales__table table .choises .fire {
     cursor: pointer;
     background: url(../img/fire.svg) no-repeat center center
@@ -3021,8 +3026,8 @@ h3 {
 
 .history-payment .history-payment__item a .custom-tooltip {
     position: relative;
-    top:30px;
-    right: 185px;
+    top:50px;
+    left: 185px;
     background: #fff;
     border: 1px solid #ebe9ee;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .13);
@@ -3037,8 +3042,8 @@ h3 {
 }
 
 .advertisement-main__table table tbody .choises a .custom-tooltip {
-    position: sticky;
-    top: 130%;
+    position: absolute;
+    top: 110%;
     right: 0;
     background: #fff;
     border: 1px solid #ebe9ee;
@@ -3051,6 +3056,24 @@ h3 {
     z-index: 99;
     white-space: nowrap;
     padding: 6px 12px
+}
+
+.advertisement-main__table table tbody .choises .froze_hard .custom-tooltip {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ebe9ee;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .13);
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #1f1e21;
+    z-index: 99;
+    white-space: nowrap;
+    padding: 6px 12px;
+    color: red;
 }
 
 .advertisement-main__table table tbody tr {
