@@ -61,6 +61,7 @@ $num_notif = \App\Models\Notification::where('userId', '=', \Illuminate\Support\
         </div>
         <div class="cards-container">
             <div class="cards-row">
+                @for($i =1; $i<10; $i++)
                 @foreach($managers as $manager)
                 <div class="card-element">
                     <div class="card-header">
@@ -97,12 +98,12 @@ $num_notif = \App\Models\Notification::where('userId', '=', \Illuminate\Support\
                     </div>
                 </div>
                 @endforeach
-
+                @endfor
 
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="exampleModalLogout" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterChoiseTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
