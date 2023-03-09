@@ -61,7 +61,7 @@ $num_notif = \App\Models\Notification::where('userId', '=', \Illuminate\Support\
         </div>
         <div class="cards-container">
             <div class="cards-row">
-                @for($i =1; $i<10; $i++)
+{{--                @for($i =1; $i<10; $i++)--}}
                 @foreach($managers as $manager)
                 <div class="card-element">
                     <div class="card-header">
@@ -98,7 +98,7 @@ $num_notif = \App\Models\Notification::where('userId', '=', \Illuminate\Support\
                     </div>
                 </div>
                 @endforeach
-                @endfor
+{{--                @endfor--}}
 
             </div>
         </div>
