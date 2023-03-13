@@ -18,9 +18,9 @@ return new class extends Migration
             $table->integer('room_id');
             $table->integer('user_from');
             $table->text('ip');
-            $table->text('message');
-            $table->text('file');
-            $table->boolean('is_show');
+            $table->text('message')->nullable()->default(null);
+            $table->text('file')->nullable()->default(null);
+            $table->boolean('is_show')->default(false);
             $table->timestamps();
         });
     }

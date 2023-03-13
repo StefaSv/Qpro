@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
 use App\Models\Wait_change_profile_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class ProfileUserController extends Controller
 {
 
     public function set(Request $request){
-        $db = DB::table('user')
+        $db = DB::table('users')
             ->where('id','=',Auth::id());
             $db->update(['name' => $request['name']]);
             $db->update(['surname' => $request['last_name']]);
@@ -22,17 +23,30 @@ class ProfileUserController extends Controller
         }
         if($request->hasFile('file')){
             $path = "/storage/".$request->file('file')->store('uploads', 'public');
-            $path = str_replace('/storage', '/storage/app/public', $path);
+           // $path = str_replace('/storage', '/storage/app/public', $path);
 
-            DB::table('user')
+            DB::table('users')
                 ->where('id','=',Auth::id())
                 ->update(['avatar' => $path]);
             return response()->json([
                 'success' => true,
+                'message' => "hasFile"
             ]);
         }
+//        dd($request);
+//        $path = "/storage/".$request->file('file')->store('uploads', 'public');
+//       // $path = str_replace('/storage', '/storage/app/public', $path);
+//
+//
+//        $video = Video::create([
+//            'offer_id' => 218,
+//            'path' => $path
+//        ]);
+//        dd($video);
+
         return response()->json([
             'success' => true,
+            'message' => "nonMid"
         ]);
     }
 
@@ -40,7 +54,7 @@ class ProfileUserController extends Controller
 
         if (Hash::check($request['old_password'],Auth::user()['password'])){
             if($request['new_password'] == $request['repeat_new_password']){
-                DB::table('user')
+                DB::table('users')
                     ->where('id','=',Auth::id())
                     ->update([
                         'password' => Hash::make($request['new_password'])

@@ -32,11 +32,11 @@
                             <div class="form-group form-group-top"><h4>Данные ДЦ</h4></div>
                             <div class="form-group">
                                 <label for="name_dc">Название ДЦ<b>*</b></label>
-                                <input type="text" name="name_dc" id="name_dc" value="{{$dealer['title']}}" disabled>
+                                <input type="text" name="name_dc" id="name_dc" value="{{$dealer['title']}}">
                             </div>
                             <div class="form-group">
                                 <label for="address_dc">Адрес ДЦ<b>*</b></label>
-                                <input type="text" name="address_dc" id="address_dc" value="{{$dealer['address']}}" disabled>
+                                <input type="text" name="address_dc" id="address_dc" value="{{$dealer['address']}}">
                             </div>
                             <div class="form-group form-group-top">
                                 <h4>Реквизиты</h4>

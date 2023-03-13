@@ -88,7 +88,9 @@ Route::middleware(['auth'])->group(function(){
 
 
 Route::get('/dd',function (){
-    dd(App\Models\User::where('email', 'S1mple_x3m@mail.ru')->get());
+    $user = App\Models\User::where('email', 'kirill12272001@gmail.com')->first();
+    $user->password = \Illuminate\Support\Facades\Hash::make('1234566');
+    $user->save();
 });
 
 Route::get('/add', [\App\Http\Controllers\Adder::class,'makeUser']);

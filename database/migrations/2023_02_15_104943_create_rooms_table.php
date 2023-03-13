@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('chat_id');
             $table->integer('user_id');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class RegistrationController extends Controller
 {
 
     public function set(Request $request){
-        $double_user = User::where('email', $request['email'])->first();
+        $double_user = User::where('email', $request['email'])->where('role','director')->first();
         if ($double_user == null || $double_user['dealerId'] == null) {
             $double_user = User::where('phone', $request['phone'])->first();
             if ($double_user == null || $double_user['dealerId'] == null) {
@@ -27,6 +27,7 @@ class RegistrationController extends Controller
                 $user = User::create([
                     'name' => $request['name'],
                     'surname' => $request['surname'],
+                    'role' => 'director',
                     'email' => $request['email'],
                     'phone' => $request['phone'],
                     'third_name' => $request['last_name'],
@@ -91,7 +92,7 @@ class RegistrationController extends Controller
 
     public function registrationCheck(Request $request){
         $dealer = Dealer::find($request['center']);
-        DB::table('user')
+        DB::table('users')
             ->where('id','=',Auth::id())
             ->update(['dealerId' => $dealer['id']]);
         //if($dealer['confirmed'] == 0){
@@ -115,7 +116,7 @@ class RegistrationController extends Controller
             'brand' => serialize([0 => Brand::where('title',$request['brand'])->first()['id']]),
             'email' => $request['email'],
         ]);
-        DB::table('user')
+        DB::table('users')
             ->where('id','=',Auth::id())
             ->update(['dealerId' => $dealer['id']]);
 

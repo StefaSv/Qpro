@@ -32,11 +32,11 @@
                 <div class="form-group form-group-top"><h4>Данные ДЦ</h4></div>
                 <div class="form-group">
                     <label for="name_dc">Название ДЦ<b>*</b></label>
-                    <input type="text" name="name_dc" id="name_dc" value="{{$dealer['title']}}" disabled>
+                    <input type="text" name="name_dc" id="name_dc" value="{{$dealer['title']}}">
                 </div>
                 <div class="form-group">
                     <label for="address_dc">Адрес ДЦ<b>*</b></label>
-                    <input type="text" name="address_dc" id="address_dc" value="{{$dealer['address']}}" disabled>
+                    <input type="text" name="address_dc" id="address_dc" value="{{$dealer['address']}}">
                 </div>
                 <div class="form-group form-group-top">
                     <h4>Реквизиты</h4>
@@ -64,11 +64,11 @@
                 </div>
                 <div class="form-group">
                     <label for="yur_address">Юридический адрес<b>*</b></label>
-                    <input type="text" name="yur_address" id="yur_address" value="{{$dealer['yor_address']}}">
+                    <input type="text" name="yur_address" id="yur_address" value="{{$dealer['yor_adress']}}">
                 </div>
                 <div class="form-group">
                     <label for="post_address">Почтовый адрес<b>*</b></label>
-                    <input type="text" name="post_address" id="post_address" value="{{$dealer['post_address']}}">
+                    <input type="text" name="post_address" id="post_address" value="{{$dealer['post_adress']}}">
                 </div>
                 <div class="form-group small-group">
                     <label for="inn">ИНН<b>*</b></label>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="form-group">
                     <label for="mail_dc">Электронная почта ДЦ<b>*</b></label>
-                    <input type="text" name="mail_dc" id="mail_dc" value="{{$dealer['mail_dc']}}">
+                    <input type="text" name="mail_dc" id="mail_dc" value="{{$dealer['email_dc']}}">
                 </div>
                 <div class="form-group">
                     <label for="site_dc">Сайт</label>

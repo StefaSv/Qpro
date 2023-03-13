@@ -55,7 +55,7 @@ $(document).ready(() => {
             success: function (data) {
                 if (typeof data[0] != "undefined" ){
                     data.forEach(function (elem){
-                        console.log(elem[0]);
+                        console.log(elem);
                         if(elem[1] == null) {
                             if (elem[0] == 1) {
                                 $('.section-support__content').append('<div class="section-support__content_item new-message"><img style="max-width: 500px" src="' + elem[3] + '"><div class ="section-support__content_time">' + elem[2] + '</div></div>');
@@ -586,7 +586,7 @@ $(document).ready(() => {
         jQuery.each(jQuery('#avatar_file')[0].files, function(i, file) {
             data.append('file', file);
             console.log(file['size']);
-            if(file['size'] > 52428800){check = 0}
+            if(file['size'] > 5242880000){check = 0}
         });
 
         $.ajaxSetup({

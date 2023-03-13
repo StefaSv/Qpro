@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="info-dc__item">
                                     <span class="label">Электронная почта ДЦ</span>
-                                    <span class="info-text" id="{{$dealer['mail_dc']}}">{{$dealer['mail_dc']}}</span>
+                                    <span class="info-text" id="{{$dealer['email_dc']}}">{{$dealer['email_dc']}}</span>
                                 </div>
                             </div>
                         </div>

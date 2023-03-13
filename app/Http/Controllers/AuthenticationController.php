@@ -15,29 +15,32 @@ class AuthenticationController extends Controller
 
         public function login(Request $request){
             $request = $request->only(['login', 'password']);
-            $login_user = User::where('email',$request['login'])->first();
+            $login_user = User::where('email',$request['login'])->where('role','director')->first();
+          //  dd($login_user);
 
             if(is_null($login_user)){
+                //dd(1);
                 return redirect()->back();
             }
 
             if (Hash::check($request['password'],$login_user['password'])){
-                Auth::attempt([
-                    'email' => $request['login'],
-                    'password' => $request['password'],
-                ]);
+                //dd(2);
+                Auth::login($login_user);
 
                // if(Dealer::find(Auth::user()['dealerId'])['confirmed'] == 0){
                //     return redirect('/registration/completed');
                // }
                 if(is_null(Dealer::find(Auth::user()['dealerId'])['full_name'])){
+                    //dd(3);
                     return redirect('/profile-DC');
                 }else{
+                    //dd(4);
                     return redirect('/profile-DC/full');
                 }
 
 
             }else{
+                //dd(5);
                 return redirect()->back();
 //                    response()->json([
 //                    'success' => false,

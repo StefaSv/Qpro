@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Driveunit extends Model
 {
     use HasFactory;
+
+    protected $table = 'driveunit';
 }

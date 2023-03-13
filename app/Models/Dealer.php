@@ -9,6 +9,8 @@ class Dealer extends Model
 {
     use HasFactory;
 
+    protected $table ='dealer';
+
     protected $fillable = [
         'id',
         'title',

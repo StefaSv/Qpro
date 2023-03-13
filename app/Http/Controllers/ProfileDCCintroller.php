@@ -13,13 +13,15 @@ class ProfileDCCintroller extends Controller
 {
 
     public function set(Request $request){
-        DB::table('dealers')->
+        DB::table('dealer')->
             where('id','=',Auth::user()['dealerId'])->
             update([
+                'title' => $request['name_dc'],
+                'address' => $request['address_dc'],
                 'full_name' => $request['full_name'],
                 'phone_center' => $request['center_tel'],
-                'yor_address' => $request['yur_address'],
-                'post_address' => $request['post_address'],
+                'yor_adress' => $request['yur_address'],
+                'post_adress' => $request['post_address'],
                 'type' => $request['org_type'],
                 'inn' => $request['inn'],
                 'kpp' => $request['kpp'],
@@ -27,7 +29,7 @@ class ProfileDCCintroller extends Controller
                 'okato' => $request['okato'],
                 'bik' => $request['bik'],
                 'ogrn' => $request['ogrn'],
-                'mail_dc' => $request['mail_dc'],
+                'email_dc' => $request['mail_dc'],
                 'site_dc' => $request['site_dc'],
                 'name_director' => $request['name_dir'],
         ]);
