@@ -511,7 +511,6 @@ $(document).ready(() => {
   $('#reg').click(function (){
       let phone = $('#phone').val();
       phone = phone.split(' ').join('');
-      phone = phone.split('+').join('');
       phone = phone.split('-').join('');
       phone = phone.split('(').join('');
       phone = phone.split(')').join('');
